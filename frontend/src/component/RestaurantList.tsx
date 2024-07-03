@@ -5,8 +5,7 @@ import { trpcHelper } from "../trpc/trpc-helper";
 import { RestaurantIF } from "../../../backend/src/common/common.interface";
 
 const RestaurantList: React.FC = () => {
-  const [restaurants, setRestaurants] = useState([]);
-  const [restaurantsUpdate, setRestaurantsUpdate] = useState(false);
+  const [restaurants, setRestaurants] = useState<RestaurantIF[]>([]);
 
   useEffect(() => {
     const getRestaurants = async () => {
@@ -14,12 +13,16 @@ const RestaurantList: React.FC = () => {
       setRestaurants(restaurantRespond);
     };
     getRestaurants();
-  }, [restaurantsUpdate]);
+  }, []);
 
   const markFavorite = async (id: string, isFavorite: boolean) => {
     try {
       await trpcHelper.addFavorite(id, isFavorite);
-      setRestaurantsUpdate(!restaurantsUpdate);
+      const newRestaurants = restaurants.map((restaurant: RestaurantIF) => {
+        if (restaurant.id === id) restaurant.isFavorite = isFavorite;
+        return restaurant;
+      });
+      setRestaurants(newRestaurants);
     } catch (error) {
       console.error(error);
     }

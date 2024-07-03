@@ -11,7 +11,8 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
   restaurant,
   markFavorite,
 }) => {
-  const { id, name, desc, rating, images, isFavorite } = restaurant;
+  const { id, name, desc, rating, images, isFavorite, ratingCount } =
+    restaurant;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const handleNextImage = () => {
@@ -43,9 +44,15 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
         </button>
       </div>
       <div className="info">
-        <h3 className="title">{name}</h3>
-        <p className="description">{desc}</p>
-        <span className="rating">⭐{rating}</span>
+        <div className="text-container">
+          <h3 className="title">{name}</h3>
+          <p className="description">{desc}</p>
+        </div>
+        <div className="rating">
+          <span className="star-icon">⭐</span>
+          <span>{rating}</span>
+          <span>({ratingCount})</span>
+        </div>
       </div>
     </div>
   );

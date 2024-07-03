@@ -64,11 +64,20 @@
 
 .info {
   padding: 10px 0;
-  text-align: center;
+  display: flex;
+  justify-content: space-between; /* Distribute space between title/description and rating */
+  align-items: center; /* Center items vertically */
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
   margin: 5px 0;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 .description {
@@ -77,6 +86,12 @@
 }
 
 .rating {
-  font-size: 14px;
+  font-size: 1em;
   color: #ff9800;
+  display: flex;
+  align-items: center;
+}
+
+.rating .star-icon {
+  margin-right: 5px;
 }
