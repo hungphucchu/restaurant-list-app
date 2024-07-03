@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { RestaurantRepository } from "src/prisma/repository/restaurant.repository";
+import { RestaurantRepository } from "../prisma/repository/restaurant.repository";
 
 
 @Injectable()

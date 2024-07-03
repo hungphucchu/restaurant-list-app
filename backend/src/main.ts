@@ -1,39 +1,32 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-
-import { createHTTPServer } from '@trpc/server/adapters/standalone';
-import { createTRPCProxyClient, httpBatchLink } from '@trpc/client';
-import { RouteType, TrpcService } from './trpc/trpc.router';
+import { createExpressMiddleware } from '@trpc/server/adapters/express';
+import { TrpcService } from './trpc/trpc.router';
+import cors from 'cors';
+import express from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  
+  app.use(cors());
+
   const trpcService = app.get(TrpcService);
 
-  // Create TRPC HTTP server
-  const trpcServer = createHTTPServer({
-    router: trpcService.router,
-  });
+  const expressApp = app.getHttpAdapter().getInstance() as express.Express;
 
-  // // Listen on port 3000 for TRPC server
-  await trpcServer.listen(3000);
-
-  // Start NestJS application server on port 3001
-  await app.listen(3001);
-
-
-  const trpcClient = createTRPCProxyClient<RouteType>({
-    links: [
-      httpBatchLink({
-        url: 'http://localhost:3000',
-      }),
-    ],
-    transformer: undefined
-  });
-
-  // Example usage of TRPC client
-  const restaurants = await trpcClient.getRestaurants.query();
-  console.log(restaurants)
   
+  expressApp.use(
+    '/trpc',
+    createExpressMiddleware({
+      router: trpcService.router,
+    })
+  );
+
+  
+  const port = process.env.PORT || 3001;
+  await app.listen(port);
+
+  console.log(`Application is running on: http://localhost:${port}`);
 }
 
 bootstrap();

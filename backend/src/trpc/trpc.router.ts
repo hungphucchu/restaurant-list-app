@@ -2,8 +2,8 @@
 
 import { Injectable } from '@nestjs/common';
 import { z } from 'zod';
-import { RestaurantService } from 'src/service/restaurant.service';
 import { publicProcedure, router } from './trpc';
+import { RestaurantService } from '../service/restaurant.service';
 
 
 @Injectable()
