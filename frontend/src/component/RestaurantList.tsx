@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './../css/RestaurantList.css';
 import RestaurantCard from './RestaurantCard';
 import { trpcHelper } from '../trpc/trpc-helper';
-import { RestaurantIF } from '../common/common.interface';
-
+import { RestaurantIF } from '../../../backend/src/common/common.interface';
 
 
 const RestaurantList: React.FC = () => {
@@ -15,7 +14,8 @@ const RestaurantList: React.FC = () => {
       setRestaurants(restaurantRespond);
     }
     getRestaurants();
-  },[restaurants]);
+  },[]);
+  console.log(restaurants);
   
   return (
     <div className="list-container">
@@ -25,7 +25,8 @@ const RestaurantList: React.FC = () => {
           title={restaurant.name}
           description={restaurant.desc}
           rating={restaurant.rating}
-          image={restaurant.images[0]}
+          images={restaurant.images}
+          isFavorite={restaurant.isFavorite}
         />
       ))}
     </div>

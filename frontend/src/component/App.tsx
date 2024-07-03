@@ -9,7 +9,7 @@ const App: React.FC = () => {
   return (
     <div className="app-container">
       <SearchBar />
-      <CategoryFilter />
+      {/* <CategoryFilter /> */}
       <RestaurantList />
       <NavigationBar />
     </div>

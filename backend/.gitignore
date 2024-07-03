@@ -3,6 +3,7 @@
 /node_modules
 /backend/node_modules
 /build
+.DS_Store
 
 # Logs
 logs
