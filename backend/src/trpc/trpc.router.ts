@@ -1,10 +1,7 @@
-// trpc.service.ts
-
 import { Injectable } from '@nestjs/common';
 import { z } from 'zod';
 import { publicProcedure, router } from './trpc';
 import { RestaurantService } from '../service/restaurant.service';
-
 
 @Injectable()
 export class TrpcService {
@@ -14,13 +11,15 @@ export class TrpcService {
     getRestaurants: publicProcedure.query(async () => {
       return this.restaurantService.getAllRestaurant();
     }),
-    addFavorite: publicProcedure.input(z.object({ id: z.string() })).mutation(async ({ input }) => {
-      const { id } = input;
-      return this.restaurantService.updateRestaurant({
-        where: { id },
-        data: { isFavorite: true },
-      });
-    }),
+    addFavorite: publicProcedure
+      .input(z.object({ id: z.string(), isFavorite: z.boolean() }))
+      .mutation(async ({ input }) => {
+        const { id, isFavorite } = input;
+        return this.restaurantService.updateRestaurant({
+          where: { id },
+          data: { isFavorite },
+        });
+      }),
   });
 }
 

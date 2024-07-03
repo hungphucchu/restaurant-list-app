@@ -1,15 +1,14 @@
 {
-    "name": "restaurant-list-app",
-    "version": "0.0.1",
-    "scripts": {
-      "format": "prettier --write .",
-      "start:app": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
-      "start:frontend": "cd frontend && npm run start",
-      "start:backend": "cd backend && npm run start:dev"
-    },
-    "devDependencies": {
-      "concurrently": "^6.2.0",
-      "prettier": "^3.2.5"
-    }
+  "name": "restaurant-list-app",
+  "version": "0.0.1",
+  "scripts": {
+    "format": "prettier --write .",
+    "start:app": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start:frontend": "cd frontend && npm run start",
+    "start:backend": "cd backend && npm run start:dev"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0",
+    "prettier": "^3.2.5"
   }
-  
+}

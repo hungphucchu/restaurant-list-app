@@ -1,5 +1,5 @@
-import React from 'react';
-import './../css/NavigationBar.css';
+import React from "react";
+import "./../css/NavigationBar.css";
 
 const NavigationBar: React.FC = () => {
   return (
