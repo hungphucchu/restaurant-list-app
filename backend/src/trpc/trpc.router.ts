@@ -9,13 +9,13 @@ export class TrpcService {
 
   public readonly router = router({
     getRestaurants: publicProcedure.query(async () => {
-      return this.restaurantService.getAllRestaurant();
+      return await this.restaurantService.getAllRestaurant();
     }),
     addFavorite: publicProcedure
       .input(z.object({ id: z.string(), isFavorite: z.boolean() }))
       .mutation(async ({ input }) => {
         const { id, isFavorite } = input;
-        return this.restaurantService.updateRestaurant({
+        return await this.restaurantService.markFavoriteRestaurant({
           where: { id },
           data: { isFavorite },
         });

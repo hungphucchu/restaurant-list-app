@@ -1,22 +1,9 @@
 import { PrismaClient } from '@prisma/client';
+import { RestaurantIF } from 'src/common/common.interface';
 
 const prisma = new PrismaClient();
 
-interface Restaurant {
-  id: string;
-  name: string;
-  rating: number;
-  ratingCount: number;
-  category: string;
-  city: string;
-  desc: string;
-  images: string[];
-  priceRange: string;
-  isFavorite: boolean;
-  featuredText: string;
-  featuredIcon: string;
-}
-function mapToRestaurantFormat(item: any): Restaurant {
+function mapToRestaurantFormat(item: any): RestaurantIF {
   return {
     id: item.id,
     name: item.name,

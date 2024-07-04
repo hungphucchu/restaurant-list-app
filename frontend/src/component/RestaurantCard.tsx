@@ -10,7 +10,7 @@ interface RestaurantCardProps {
 const RestaurantCard: React.FC<RestaurantCardProps> = ({
   restaurant,
   markFavorite,
-}) => {
+}: RestaurantCardProps) => {
   const { id, name, desc, rating, images, isFavorite, ratingCount } =
     restaurant;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);

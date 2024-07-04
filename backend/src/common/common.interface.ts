@@ -12,3 +12,18 @@ export interface RestaurantIF {
   featuredText: string;
   featuredIcon: string;
 }
+
+export interface Status {
+  code: number;
+  message: string;
+}
+
+export interface BaseResponse {
+  status: Status;
+}
+
+export interface RestaurantsRespone extends BaseResponse {
+  data: RestaurantIF[];
+}
+
+export interface UpdateRestaurantsResponse extends BaseResponse {}
